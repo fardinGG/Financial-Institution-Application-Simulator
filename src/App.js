@@ -1,5 +1,5 @@
 import Footer from "./components/footer";
-import IntroductionPage from "./pages/IntroPage";
+import IntroductionPage from "./pages/SignIn";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateAccount from "./pages/CreateAccount";
 import HomePage from "./pages/HomePage";
@@ -18,17 +18,22 @@ function App() {
       <Router>
         <Routes>
         <Route exact path='/' element={<HomePage/>} />
-          <Route exact path='/Login' element={<IntroductionPage/>} />
-          <Route exact path='/Signup' element={<CreateAccount/>} />
-          <Route exact path='/Home' element={<HomePage/>} />
-          <Route exact path='/contact' element={<HomePage/>} />
-          <Route exact path='/docx' element={<AboutPage/>} />
-          <Route exact path='/About' element={<AboutPage/>} />
-          <Route exact path='/adminLogin' element={<AdminPriv/>} />
+        <Route exact path='/Home' element={<HomePage/>} />
+        <Route exact path='/About' element={<AboutPage/>} />
+        <Route exact path='/docx' element={<AboutPage/>} />
+        <Route exact path='/contact' element={<HomePage/>} />
+
+        <Route exact path='/Login' element={<IntroductionPage/>} />
+        <Route exact path='/Signup' element={<CreateAccount/>} />
+          
+          
+          
+          
+        <Route exact path='/Login-admin' element={<AdminPriv/>} />
+        <Route exact path='/Login-admin/ClientCred' element={<UsersList />} />
 
 
-          <Route exact path='/accInt' element={<UsersList />} />
-        </Routes>
+      </Routes>
     </Router>
     <div>
       
