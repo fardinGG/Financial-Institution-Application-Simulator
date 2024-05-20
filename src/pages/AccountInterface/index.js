@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import HeaderB from '../../components/header';
 
-function AccountDetails() {
-  const [accountDetails, setAccountDetails] = useState(null);
+function UsersList() {
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch('https://script.google.com/macros/s/AKfycbxnejCCoZ4irWZpaalgVCQxmdop0FN82DcUl27X0b9nV7ktMgf640l7AozK-Cn2k3Kt/exec', {
-  method: 'GET',
-  mode: 'no-cors', // Include this option
-})
-  .then(response => response.json())
-  .then(data => {
-    // Handle the response data
-    console.log(data);
-  })
-  .catch(error => {
-    // Handle any errors
-    console.error('Error fetching account details:', error);
-  });
+    // Fetch all users
+    axios.get('http://localhost:5002/api/users')
+      .then(response => {
+        setUsers(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching users:', error);
+      });
   }, []);
 
   return (
     <div>
-      <h2>Account Details</h2>
-      {accountDetails ? (
-        <div>
-          <p>Account Number: {accountDetails.accountNumber}</p>
-          <p>Name: {accountDetails.fullname}</p>
-          <p>Email: {accountDetails.email}</p>
-          {/* Add more account details as needed */}
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <HeaderB />
+      <br></br>
+      <br>
+      </br>
+      <br></br>
+      <br></br>
+      <h1>Users List</h1>
+      <ul>
+        {users.map(user => (
+          <li key={user._id}>
+            {user.fullname} - {user.email} - {user.accountNumber} - {user.password}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-export default AccountDetails;
+export default UsersList;
