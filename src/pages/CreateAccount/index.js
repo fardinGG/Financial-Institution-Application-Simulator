@@ -74,37 +74,43 @@ function CreateAccount() {
     const data = new FormData(event.currentTarget);
     const password = data.get('password');
     const confirmPassword = data.get('confirmPassword');
-  
+
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
-  
+
     setError('');
-  
+
     const formData = {
+      _id: generateUniqueAccountNumber(),  // Ensure this matches your backend expected data
       fullname: data.get('fullname'),
-      dob: data.get('DOB'),
+      dob: formatDate(data.get('DOB')),
       email: data.get('email'),
       password,
       accountNumber: generateUniqueAccountNumber(),
     };
-  
+    
+
     try {
-      const response = await axios.post('http://localhost:5002/api/createAccount', formData); // Ensure the URL is correct
+      const response = await axios.post('http://localhost:5002/api/createAccount', formData);
       if (response.status === 201) {
         setAccountCreated(true);
         setTimeout(() => {
           navigate('/Login', { state: { accountCreated: true } });
         }, 2000);
-      } else {
-        setError('Error creating account');
       }
     } catch (error) {
-      setError('Network error');
-      console.error('Network error:', error);
+      console.error('Error creating account:', error);
+      setError('Error creating account. Please try again.');
     }
   };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0]; // Returns date in YYYY-MM-DD format
+  };
+
+  
   
 
   
