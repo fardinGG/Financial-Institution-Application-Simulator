@@ -50,6 +50,7 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
+
 // Define a route to retrieve a specific user by account number
 app.get('/api/users/:accountNumber', async (req, res) => {
   const accountNumber = req.params.accountNumber;
@@ -63,6 +64,9 @@ app.get('/api/users/:accountNumber', async (req, res) => {
     res.status(500).send('Error retrieving user');
   }
 });
+
+
+
 
 // Change the port if necessary
 const port = process.env.PORT || 5002;
