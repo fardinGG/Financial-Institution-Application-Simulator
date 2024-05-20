@@ -3,9 +3,10 @@ import IntroductionPage from "./pages/IntroPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateAccount from "./pages/CreateAccount";
 import HomePage from "./pages/HomePage";
-import AccountDetails from "./pages/AccountInterface";
 import AboutPage from "./pages/About";
-import AdminPriv from "./pages/AdminLogin";
+import AdminPriv from "./pages/AdminPages/AdminLogin";
+import UsersList from "./pages/AccountInterface";
+
 
 
 
@@ -26,7 +27,7 @@ function App() {
           <Route exact path='/adminLogin' element={<AdminPriv/>} />
 
 
-          <Route exact path='/accInt' element={<AccountDetails />} />
+          <Route exact path='/accInt' element={<UsersList />} />
         </Routes>
     </Router>
     <div>
