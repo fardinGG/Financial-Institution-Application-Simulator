@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import HeaderB from '../../components/header';
 import { Alert } from '@mui/material';
+import axios from 'axios';
+
 
 
 let theme = createTheme({
@@ -67,63 +69,45 @@ function CreateAccount() {
     // Once a unique number is generated, return it
     return accountNumber;
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const password = data.get('password');
     const confirmPassword = data.get('confirmPassword');
-
-    console.log('Form Submitted'); // Debugging log
-
+  
     if (password !== confirmPassword) {
       setError('Passwords do not match');
-      console.log('Passwords do not match'); // Debugging log
       return;
     }
-
+  
     setError('');
-
+  
     const formData = {
       fullname: data.get('fullname'),
       dob: data.get('DOB'),
       email: data.get('email'),
       password,
+      accountNumber: generateUniqueAccountNumber(),
     };
-
-    console.log('Form Data:', formData); // Debugging log
-
+  
     try {
-      let accountNumber = generateUniqueAccountNumber(); // Function to generate a unique 7-digit account number
-      formData.accountNumber = accountNumber;
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxnejCCoZ4irWZpaalgVCQxmdop0FN82DcUl27X0b9nV7ktMgf640l7AozK-Cn2k3Kt/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-
-      console.log('Fetch Response:', response);
-
-    setAccountCreated(true);
-    setTimeout(() => {
-      navigate('/Login', { state: { accountCreated: true } });
-    }, 2000);
-  
-  
-
-  if (response.ok) {
-    console.log('Data stored successfully');
-  } else {
-    console.error('Error storing data:', response.status);
-  }
-} catch (error) {
-  console.error('Network error:', error);
-}
+      const response = await axios.post('http://localhost:5002/api/createAccount', formData); // Ensure the URL is correct
+      if (response.status === 201) {
+        setAccountCreated(true);
+        setTimeout(() => {
+          navigate('/Login', { state: { accountCreated: true } });
+        }, 2000);
+      } else {
+        setError('Error creating account');
+      }
+    } catch (error) {
+      setError('Network error');
+      console.error('Network error:', error);
+    }
   };
+  
+
+  
 
   return (
     <ThemeProvider theme={theme}>
