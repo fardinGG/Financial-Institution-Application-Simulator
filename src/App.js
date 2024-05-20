@@ -24,10 +24,10 @@ function App() {
           <Route exact path='/contact' element={<HomePage/>} />
           <Route exact path='/docx' element={<AboutPage/>} />
           <Route exact path='/About' element={<AboutPage/>} />
-          <Route exact path='/adminLogin' element={<AdminPriv/>} />
+          <Route exact path='/Login-admin' element={<AdminPriv/>} />
 
 
-          <Route exact path='/accInt' element={<UsersList />} />
+          <Route exact path='/Login-admin/ClientCred' element={<UsersList />} />
         </Routes>
     </Router>
     <div>

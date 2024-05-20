@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableFooter, TablePagination } from '@mui/material';
 import './styles.css';
+import HeaderB from '../../../components/header';
 
 function UsersList() {
   const [users, setUsers] = useState([]);
@@ -43,11 +44,14 @@ function UsersList() {
   };
 
   return (
-    <TableContainer component={Paper}>
+
+    <TableContainer className='tableCC' component={Paper}>
+      <HeaderB/>
+      <br></br><br></br><br></br><br></br>
       <center><h1 className='title'>Users Credential List</h1></center>
       <Table>
         <TableHead className='TableH'>
-          <TableRow>
+          <TableRow className='TableHcontent'>
           <TableCell className='TableHcontent'>Account Number</TableCell>
             <TableCell className='TableHcontent'>Full Name</TableCell>
             <TableCell className='TableHcontent'>Date of Birth</TableCell>
