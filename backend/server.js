@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 // Connect to MongoDB
 
-const uri = 'mongodb+srv://tester123:test111@fiascluster.ghdz6o3.mongodb.net/?retryWrites=true&w=majority&appName=FIASCluster';
+const uri = 'mongodb+srv://tester123:test111@fiascluster.ghdz6o3.mongodb.net/fias-user-info?retryWrites=true&w=majority&appName=FIASCluster';
 mongoose.connect(uri)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
